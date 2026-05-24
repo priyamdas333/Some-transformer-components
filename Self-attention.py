@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import math
 
 class SelfAttention(nn.Module):
     
@@ -19,7 +20,7 @@ class SelfAttention(nn.Module):
         K=self.W_K(x)
         V=self.W_V(x)
         #All the attention computationsare happening in the attention head
-        attention_scores=Q @ K.transpose(-2,-1)/math.sqrt(d_head)
+        attention_scores=Q @ K.transpose(-2,-1)/math.sqrt(self.d_head)
         attention_weights=F.softmax(attention_scores)
         attention_output=attention_weights @ V
         #Final output
