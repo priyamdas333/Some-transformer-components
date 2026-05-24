@@ -1,3 +1,7 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
 def SelfAttention(nn.Module):
     
     #Define the parameters of the class for object initialization
