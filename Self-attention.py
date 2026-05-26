@@ -14,7 +14,7 @@ class SelfAttention(nn.Module):
         self.W_O=nn.Linear(d_head,d_model,bias=False)
 
     #Define the Methods/Functions over the initialized object
-    def forward(self,x):
+    def forward(self,x, return_attention=False):
         
         Q=self.W_Q(x)
         K=self.W_K(x)
@@ -25,7 +25,11 @@ class SelfAttention(nn.Module):
         attention_output=attention_weights @ V
         #Final output
         O=self.W_O(attention_output)
-        return O
+        if return_attention:
+            return attention_weights,O
+        else:
+            return O
+        
 
 
 
