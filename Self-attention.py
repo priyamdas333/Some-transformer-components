@@ -20,7 +20,13 @@ class SelfAttention(nn.Module):
         K=self.W_K(x)
         V=self.W_V(x)
         #All the attention computationsare happening in the attention head
-        attention_scores=Q @ K.transpose(-2,-1)/math.sqrt(self.d_head)
+        attention_scores=torch.matmul( Q, K.transpose(-2,-1)/math.sqrt(self.d_head))
+        #Use causal mask for autoregressive training
+        #Through this, the model can't see the future token and hence after predicting
+        #the model prediction loss can be computed and w.r.t weights can be adjusted
+        seq_len=x.size()
+        mask=torch.triu(torch.ones(seq_len,seq_len,device=x.device),diagonal=1).bool()
+        attention_scores=attention_scores.masked_fill(mask,float('-inf'))
         attention_weights=F.softmax(attention_scores)
         attention_output=attention_weights @ V
         #Final output
