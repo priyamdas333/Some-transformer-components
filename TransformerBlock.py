@@ -30,4 +30,4 @@ class TransformerBlock(nn.Module):
         else:
             x=x+(self.attention(self.ln1(x)))
             x=x+self.ff(self.ln2(self.ln2(x)))
-            return x
+            return x 
