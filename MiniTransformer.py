@@ -13,7 +13,7 @@ class MiniTransformer(nn.Module):
           → LayerNorm → Linear → Logits
 
     """
-    def forward(self,vocab_size=26, d_model=64, n_heads=4,d_ff=128, n_layers=2, max_seq=64):
+    def __init__(self,vocab_size=26, d_model=64, n_heads=4,d_ff=128, n_layers=2, max_seq=64):
         super().__init__()
         self.vocab_size = vocab_size
         self.d_model = d_model
@@ -30,3 +30,22 @@ class MiniTransformer(nn.Module):
         ])
         self.ln_final=nn.LayerNorm(d_model)
         self.head=nn.Linear(d_model,vocab_size,bias=False)
+    
+    def forward(self,x,return_attention=False):
+        batch,seq_len=x.shape
+        positions=torch.arange(seq_len,device=x.device).unsqueeze(0)
+        h=self.token_emb(x)+self.pos_emb(positions)
+
+        all_attn=[]
+        for block in self.blocks:
+            if return_attention:
+                h,attn=block(h,return_attention=True)
+                all_attn.append(attn)
+            else:
+                h=block(h)
+        
+        logits=self.head(self.ln_final(h))
+        if return_attention:
+            return logits,all_attn
+        else:
+            return logits
