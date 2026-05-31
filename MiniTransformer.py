@@ -49,3 +49,15 @@ class MiniTransformer(nn.Module):
             return logits,all_attn
         else:
             return logits
+        
+# Quick check
+test_model = MiniTransformer()
+total_params = sum(p.numel() for p in test_model.parameters())
+print(f"✓ MiniTransformer defined")
+print(f"  Total parameters: {total_params:,}")
+
+dummy = torch.randint(0, 26, (2, 11))
+logits, attn = test_model(dummy, return_attention=True)
+print(f"  Input shape:  {dummy.shape}")
+print(f"  Output shape: {logits.shape}")
+print(f"  Attn shapes:  {[a.shape for a in attn]}")        
