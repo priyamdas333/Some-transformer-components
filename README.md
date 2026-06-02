@@ -91,5 +91,5 @@ To explore or run this project locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/priyamdas333/Some-transformer-components.git](https://github.com/priyamdas333/Some-transformer-components.git)
+   git clone https://github.com/priyamdas333/Raw-GPT-style-Transformer-Components.git
    cd Some-transformer-components
