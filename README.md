@@ -1,5 +1,5 @@
 ﻿
-# Some Transformer Components
+# Raw GPT Transformer Components
 
 A research-oriented collection of Transformer building blocks implemented from scratch in PyTorch.
 
