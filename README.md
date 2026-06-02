@@ -1,2 +1,34 @@
 ﻿# Some-transformer-components
 This repo consists of building different raw components of a GPT style (Decoder only) traansformer model starting from synthetic data generation to training that model
+
+# GPT-Style Transformer Components
+
+Welcome to **Some-transformer-components**! This repository is dedicated to building the fundamental raw components of a GPT-style (Decoder-only) Transformer model from the ground up. It covers the entire end-to-end pipeline, starting from synthetic data generation all the way to model assembly and training.
+
+## 🚀 Project Overview
+
+This project breaks down the complex architecture of a Transformer into understandable, modular, and highly readable Python scripts. It is designed to demonstrate how large language models function under the hood, making it a great resource for understanding attention mechanisms and decoder-only sequential processing.
+
+## 📂 Repository Structure & Components
+
+The repository is modularized into distinct files, each representing a crucial step in the Transformer architecture or the training process:
+
+### 🧠 Core Architecture
+* **`Self-attention.py`**: Implements the foundational scaled dot-product self-attention mechanism, allowing the model to weigh the importance of different tokens in a sequence.
+* **`Multi-head-attention.py`**: Expands on basic self-attention by projecting queries, keys, and values into multiple "heads," enabling the model to capture various representational subspaces simultaneously.
+* **`TransformerBlock.py`**: The standard building block of the decoder network. It integrates the multi-head attention layer with a position-wise feed-forward network, residual connections, and layer normalization.
+* **`MiniTransformer.py`**: The overarching model definition. This file strings together the embedding layers, positional encodings, and multiple Transformer blocks, complete with robust parameter checking.
+
+### ⚙️ Data & Training
+* **`Synthetic_Repeated_Pattern_Dataset.py`**: A custom data generation module that creates synthetic sequences with repeated patterns. This serves as a lightweight, predictable dataset to test if the model is successfully learning dependencies.
+* **`Parameter_Dataset_Model_Initialization.py`**: A centralized configuration script that handles the initialization of all hyperparameters, prepares the synthetic dataset, and initializes the MiniTransformer model.
+* **`Training_Pipeline.py`**: The main execution script containing the complete training loop. It manages forward passes, loss calculation, backpropagation, and weight optimization.
+
+## 🛠️ Getting Started
+
+To explore or run this project locally, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/priyamdas333/Some-transformer-components.git](https://github.com/priyamdas333/Some-transformer-components.git)
+   cd Some-transformer-components
